@@ -1,0 +1,12 @@
+{
+	"name": "DS_FOR_EACH_SQL",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Edina_Dev_Sql",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	}
+}
