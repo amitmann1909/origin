@@ -1,0 +1,173 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "PowerBiDatasetRefresh"
+		},
+		"Blobtoblobcpysrc_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Blobtoblobcpysrc'"
+		},
+		"Edina_Dev_Sql_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Edina_Dev_Sql'"
+		},
+		"blobtoblobcpydestination_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'blobtoblobcpydestination'"
+		},
+		"cars_Sql_destination_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'cars_Sql_destination'"
+		},
+		"cars_cpy_data_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'cars_cpy_data'"
+		},
+		"db_parametrization_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'db_parametrization'"
+		},
+		"ecars_edina_ayush_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ecars_edina_ayush'"
+		},
+		"param_input_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'param_input'"
+		},
+		"param_output_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'param_output'"
+		},
+		"watermark_data_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'watermark_data'"
+		},
+		"zip_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'zip'"
+		},
+		"SAS_SRC_sasUri": {
+			"type": "secureString",
+			"metadata": "Secure string for 'sasUri' of 'SAS_SRC'"
+		},
+		"trigger1_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/43b4bb12-b882-46e7-93a4-0e6afb14206a/resourceGroups/amitmanndemo/providers/Microsoft.Storage/storageAccounts/amitmanndemo"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"Blobtoblobcpysrc_connectionString": {
+						"value": "[parameters('Blobtoblobcpysrc_connectionString')]"
+					},
+					"Edina_Dev_Sql_connectionString": {
+						"value": "[parameters('Edina_Dev_Sql_connectionString')]"
+					},
+					"blobtoblobcpydestination_connectionString": {
+						"value": "[parameters('blobtoblobcpydestination_connectionString')]"
+					},
+					"cars_Sql_destination_connectionString": {
+						"value": "[parameters('cars_Sql_destination_connectionString')]"
+					},
+					"cars_cpy_data_connectionString": {
+						"value": "[parameters('cars_cpy_data_connectionString')]"
+					},
+					"db_parametrization_connectionString": {
+						"value": "[parameters('db_parametrization_connectionString')]"
+					},
+					"ecars_edina_ayush_connectionString": {
+						"value": "[parameters('ecars_edina_ayush_connectionString')]"
+					},
+					"param_input_connectionString": {
+						"value": "[parameters('param_input_connectionString')]"
+					},
+					"param_output_connectionString": {
+						"value": "[parameters('param_output_connectionString')]"
+					},
+					"watermark_data_connectionString": {
+						"value": "[parameters('watermark_data_connectionString')]"
+					},
+					"zip_connectionString": {
+						"value": "[parameters('zip_connectionString')]"
+					},
+					"SAS_SRC_sasUri": {
+						"value": "[parameters('SAS_SRC_sasUri')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"trigger1_properties_typeProperties_scope": {
+						"value": "[parameters('trigger1_properties_typeProperties_scope')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_1')]"
+			]
+		}
+	]
+}
