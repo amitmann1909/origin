@@ -1,0 +1,27 @@
+{
+	"name": "lookup_val",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "watermark_data",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "PersonID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Year",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "lookup_val"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

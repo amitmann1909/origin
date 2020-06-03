@@ -1,0 +1,17 @@
+{
+	"name": "sql_csv_to_table",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "cars_Sql_destination",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "cars"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,152 @@
+{
+	"name": "PL_DATA_Logtaskcontrol_to_csv",
+	"properties": {
+		"activities": [
+			{
+				"name": "LKA_InsertLogtaskControlFlowKey",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderStoredProcedureName": "[process].[InsertLogTaskControlFlow]",
+						"storedProcedureParameters": {
+							"adfRunId": {
+								"type": "String"
+							},
+							"dataFactory": {
+								"type": "String"
+							},
+							"dataLoadStatus": {
+								"type": "String",
+								"value": "In Progress"
+							},
+							"endingActivity": {
+								"type": "String"
+							},
+							"groupId": {
+								"type": "Int64"
+							},
+							"mainEntityName": {
+								"type": "String"
+							},
+							"pipeline": {
+								"type": "String"
+							},
+							"schemaName": {
+								"type": "String"
+							},
+							"startingActivity": {
+								"type": "String"
+							}
+						},
+						"queryTimeout": "02:00:00"
+					},
+					"dataset": {
+						"referenceName": "DS_ADLS_LOGTASKCONTROL",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "LKA_InsertLogtaskControlFlowKey",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "Insert into cars table ",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "type",
+									"type": "String"
+								},
+								"sink": {
+									"name": "type",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "name",
+									"type": "String"
+								},
+								"sink": {
+									"name": "name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "yearof",
+									"type": "String"
+								},
+								"sink": {
+									"name": "yearof",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_ADLS_EDINA_DEV_CARS_TABLE",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Carscsv",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "Log_Task_Control_key"
+		},
+		"annotations": []
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

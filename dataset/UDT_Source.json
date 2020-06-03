@@ -1,0 +1,22 @@
+{
+	"name": "UDT_Source",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Edina_Dev_Sql",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "val",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Strings_val"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

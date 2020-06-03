@@ -1,0 +1,23 @@
+{
+	"name": "DestinationDataset_2eu",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "blobtoblobcpydestination",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "cars2.txt",
+				"container": "cars2"
+			},
+			"columnDelimiter": "|",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

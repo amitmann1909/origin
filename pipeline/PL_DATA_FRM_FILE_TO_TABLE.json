@@ -1,0 +1,238 @@
+{
+	"name": "PL_DATA_FRM_FILE_TO_TABLE",
+	"properties": {
+		"activities": [
+			{
+				"name": "CPA_FRM_FILE_TO_TABLE",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Location ID",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Location_id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "1 mile pop",
+									"type": "String"
+								},
+								"sink": {
+									"name": "One_mile",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "3 mile pop",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Three_mile",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "5 mile pop",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Five_mile",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Actual Opening",
+									"type": "String"
+								},
+								"sink": {
+									"name": "actual_opening",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "AverageTerm",
+									"type": "String"
+								},
+								"sink": {
+									"name": "actual_term",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Avg  monthly gross personal training revenue",
+									"type": "String"
+								},
+								"sink": {
+									"name": "average_monthly_gross_revenue",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "BOE Verified",
+									"type": "String"
+								},
+								"sink": {
+									"name": "BOE_verified",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Close Date",
+									"type": "String"
+								},
+								"sink": {
+									"name": "closedate",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Competition",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Competetion",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "E-mail Address",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Mailing_Address",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Exchange Rate",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Exchange_rate",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Existing Sales Rep",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Existing_rate",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Express Location",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Express_Location",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Financing Type",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Financial_type",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Gross Rent",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Gross_rent",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Hours of Operation",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Hours_of_Operation",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Lack of marketing",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Lack_of_Marketing",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_ADLS_FRM_FILE_INPUT",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_ADLS_FRM_TABLE_DESTINATION",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "FRM FILE LOAD"
+		},
+		"annotations": []
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

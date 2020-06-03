@@ -1,0 +1,30 @@
+{
+	"name": "table_to_diff_table",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "cars_cpy_data",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "type",
+				"type": "varchar"
+			},
+			{
+				"name": "name",
+				"type": "varchar"
+			},
+			{
+				"name": "yearof",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "carscpy"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,99 @@
+{
+	"name": "DS_ADLS_LOGTASKCONTROL",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Edina_Dev_Sql",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "LogTaskControl"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "LogTaskControlFlowKey",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "StartTime",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "EndTime",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "DataFactory",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Pipeline",
+				"type": "nvarchar"
+			},
+			{
+				"name": "StartingActivity",
+				"type": "nvarchar"
+			},
+			{
+				"name": "EndingActivity",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SchemaName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TableName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TotalRowsFromSource",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TotalRowsFailed",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TotalRowsInserted",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TotalRowsUpdated",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "GroupId",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "DataLoadStatus",
+				"type": "nvarchar"
+			},
+			{
+				"name": "MainEntityName",
+				"type": "varchar"
+			},
+			{
+				"name": "AdfRunId",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "process",
+			"table": "LogTaskControlFlow"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
